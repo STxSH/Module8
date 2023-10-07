@@ -2,25 +2,36 @@
 {
     internal class Program
     {
+
+        //task 8.2.1
+
         static void Main(string[] args)
         {
+            string path = "C:\\";
+
+            Console.WriteLine($"Количество папок в каталоге {path}: {GetCatalogsCount(path)}, количество файлов: {GetFilesCount(path)}");
             Console.ReadKey();
         }
 
-        //task 8.1.4
-
-        public class Drive
+        static int GetFilesCount(string path)
         {
-            public Drive(string name, long totalSpace, long freeSpace)
+            if (Directory.Exists(path))
             {
-                Name = name;
-                TotalSpace = totalSpace;
-                FreeSpace = freeSpace;
+                string[] files = Directory.GetFiles(path);
+                return files.Length;
             }
-
-            public string Name;
-            public long TotalSpace;
-            public long FreeSpace;
+            else { return 0; }
         }
+
+        static int GetCatalogsCount(string path)
+        {
+            if (Directory.Exists(path))
+            {
+                string[] catalogs = Directory.GetDirectories(path);
+                return catalogs.Length;
+            }
+            else { return 0; }
+        }
+
     }
 }
