@@ -5,7 +5,7 @@ namespace Module8
     internal class Program
     {
 
-        //task 8.2.2
+        //task 8.2.3
 
         static void Main(string[] args)
         {
@@ -49,6 +49,11 @@ namespace Module8
                 DirectoryInfo newDirectory = new DirectoryInfo(path + "newDirectory");
                 if (!newDirectory.Exists) {newDirectory.Create();}
                 Console.WriteLine(dirInfo.GetDirectories().Length + " " + dirInfo.GetFiles().Length);
+
+                DirectoryInfo deleteDirectory = new DirectoryInfo(path + "newDirectory");
+                if (deleteDirectory.Exists) { deleteDirectory.Delete(); }
+                Console.WriteLine(dirInfo.GetDirectories().Length + " " + dirInfo.GetFiles().Length);
+
             }
             catch (Exception e)
             {
