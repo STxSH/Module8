@@ -5,33 +5,27 @@ namespace Module8
     internal class Program
     {
 
-        //task 8.3.2
+        //task 8.4.1
 
         static void Main(string[] args)
         {
-            string filePath = "D:\\YandexAnton\\main\\YandexDisk\\Синхронизация\\Skillfactory\\Module8\\Module8\\Program.cs";
-            FileInfo file = new FileInfo(filePath);
-            if (!File.Exists(filePath))
-            {
-                Console.WriteLine("Указанный файл не найден!");
-            }
-            else
-            {
-                using (StreamWriter sw = file.AppendText())
-                {
-                    sw.WriteLine($"//Время последнего запуска: {DateTime.Now.ToString()}");
-                }
-                using (StreamReader sr = File.OpenText(filePath))
-                {                    
-                    string str = "";
-                    while ((str = sr.ReadLine()) != null)
-                    {
-                        Console.WriteLine(str);
-                    }
-                }
-            }
+            string filePath = "D:\\YandexAnton\\main\\YandexDisk\\Синхронизация\\Skillfactory\\BinaryFile.bin";
+            ReadValues(filePath);
             Console.ReadKey();
         }        
+        static void ReadValues(string path)
+        {
+            string StringValue;
+
+            if (File.Exists(path))
+            {
+                using (BinaryReader reader = new BinaryReader(File.Open(path, FileMode.Open)))
+                {
+                    StringValue = reader.ReadString();
+                }
+                Console.WriteLine(StringValue);
+            }
+
+        }
     }
 }
-//Время последнего запуска: 08.10.2023 17:28:22
