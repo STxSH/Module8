@@ -5,55 +5,24 @@ namespace Module8
     internal class Program
     {
 
-        //task 8.2.3
+        //task 8.2.4
 
         static void Main(string[] args)
         {
-            string path = "C:\\";
-
-            Console.WriteLine($"Количество папок в каталоге {path}: {GetCatalogsCount(path)}, количесто файлов: {GetFilesCount(path)}");
-            GetDirectoryInfo(path);
+            string path = "D:\\232323";
+            string recyclePath = "D:\\ТипоКорзина\\232323";
+            MoveDirectory(path, recyclePath);
             Console.ReadKey();
         }
-
-        static int GetFilesCount(string path)
-        {
-            if (Directory.Exists(path))
-            {
-                string[] files = Directory.GetFiles(path);
-                return files.Length;
-            }
-            else { return 0; }
-        }
-
-        static int GetCatalogsCount(string path)
-        {
-            if (Directory.Exists(path))
-            {
-                string[] catalogs = Directory.GetDirectories(path);
-                return catalogs.Length;
-            }
-            else { return 0; }
-        }
-
-        static void GetDirectoryInfo(string path)
+         
+        static void MoveDirectory(string path, string recyclePath)
         {
             try
             {
-                DirectoryInfo dirInfo = new DirectoryInfo(path);
-                if (dirInfo.Exists)
-                {
-                    Console.WriteLine(dirInfo.GetDirectories().Length + " " + dirInfo.GetFiles().Length);
-                }
+                DirectoryInfo dir = new DirectoryInfo(path);
+                string newPath = recyclePath;
 
-                DirectoryInfo newDirectory = new DirectoryInfo(path + "newDirectory");
-                if (!newDirectory.Exists) {newDirectory.Create();}
-                Console.WriteLine(dirInfo.GetDirectories().Length + " " + dirInfo.GetFiles().Length);
-
-                DirectoryInfo deleteDirectory = new DirectoryInfo(path + "newDirectory");
-                if (deleteDirectory.Exists) { deleteDirectory.Delete(); }
-                Console.WriteLine(dirInfo.GetDirectories().Length + " " + dirInfo.GetFiles().Length);
-
+                if (dir.Exists && !Directory.Exists(newPath)) { dir.MoveTo(newPath); }
             }
             catch (Exception e)
             {
